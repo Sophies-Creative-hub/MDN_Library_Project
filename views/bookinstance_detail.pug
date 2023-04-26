@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  h1= title
+
+  dl
+    div
+      dt Book:
+      dd
+        a(href=bookinstance.book.url)= bookinstance.book.title
+    div
+      dt Imprint:
+      dd= bookinstance.imprint
+    div
+      dt Status:
+      dd= bookinstance.status
+    div
+      dt Due back:
+      dd= due_back_formatted
+    div
+      dt ID:
+      dd= bookinstance._id
+
+  if bookinstance.status === 'Available'
+    form(action=bookinstance.url+'/update', method='post')
+      button(type='submit') Update Status
+
