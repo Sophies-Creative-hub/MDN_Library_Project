@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require("mongoose");
+require('dotenv').config();
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -11,10 +13,11 @@ const catalogRouter = require("./routes/catalog"); //Import routes for "catalog"
 
 var app = express();
 // Set up mongoose connection
-mongoose.connect('mongodb://localhost:27017/locallibraryDB', {
+mongoose.connect(`mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
+
 
 const db = mongoose.connection;
 
